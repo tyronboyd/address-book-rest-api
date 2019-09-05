@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import com.address.book.service.AddressBookService;
 
@@ -28,7 +29,7 @@ public class AddressBookController {
 
     @RequestMapping(value = "/add/contact", method = RequestMethod.POST)
     public ResponseEntity<List<Contact>> saveContact(@RequestBody Contact contact) throws UpdateRepositoryException {
-        if (contact.getName() != null && contact.getTelephoneNumber() != null) {
+        if (StringUtils.isEmpty(contact.getName()) && StringUtils.isEmpty(contact.getTelephoneNumber())) {
             return new ResponseEntity<>(addressBookService.saveContact(contact), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

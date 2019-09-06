@@ -3,12 +3,10 @@ package com.address.book.controller;
 import com.address.book.dto.ContactDto;
 import com.address.book.exception.ContactMappingException;
 import com.address.book.exception.UpdateRepositoryException;
-import com.address.book.model.Contact;
-import com.sun.deploy.net.HttpResponse;
-import org.hibernate.validator.internal.util.logging.LoggerFactory;
+import com.address.book.exception.http.HttpBadRequestException;
+import com.address.book.exception.http.HttpNotFoundException;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
@@ -35,9 +33,8 @@ public class AddressBookController {
             return new ResponseEntity<>(addressBookService.getAllContacts(), HttpStatus.OK);
         } catch (Exception ex) {
             logger.debug("Could not get all contacts: ", ex);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new HttpBadRequestException("Could not get all contacts");
         }
-
 	}
 
     @RequestMapping(value = "/add/contact", method = RequestMethod.POST)
@@ -47,11 +44,10 @@ public class AddressBookController {
                 return new ResponseEntity<>(addressBookService.saveContact(contactDto), HttpStatus.OK);
             } catch (Exception ex) {
                 logger.debug("Could not save contact: ", ex);
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                throw new HttpBadRequestException("Could not save contact");
             }
-
         }
-         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        throw new HttpBadRequestException("Could not save contact");
     }
 
     @RequestMapping(value = "/delete/contact/{id}", method = RequestMethod.POST)
@@ -62,10 +58,10 @@ public class AddressBookController {
                 return new ResponseEntity<>(addressBookService.getAllContacts(), HttpStatus.OK);
             }
             logger.debug("Contact ID is null or empty: ");
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new HttpNotFoundException("Contact ID is null or empty");
         } catch (Exception ex) {
-            logger.debug("Canont delete contact: ", ex);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            logger.debug("Could not delete contact: ", ex);
+            throw new HttpBadRequestException("Could not delete contact");
         }
     }
 }

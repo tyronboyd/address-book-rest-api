@@ -5,11 +5,11 @@ import com.address.book.exception.ContactMappingException;
 import com.address.book.exception.UpdateRepositoryException;
 import com.address.book.mapper.ContactDtoMapper;
 import com.address.book.model.Contact;
-import org.apache.tomcat.util.codec.binary.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 import com.address.book.repository.AddressBookRepository;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class AddressBookServiceImpl implements AddressBookService {
 
     public List<ContactDto> getAllContacts() throws UpdateRepositoryException, ContactMappingException {
         List<ContactDto> contacts = contactDtoMapper.mapToDtoList(addressBookRepository.findAllByOrderByNameAsc());
-        if (contacts != null) {
+        if (!StringUtils.isEmpty(contacts)) {
             return contacts;
         }
         throw new UpdateRepositoryException("Unable to fetch Contacts List.");

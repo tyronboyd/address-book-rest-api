@@ -1,5 +1,7 @@
 package com.address.book.controller;
 
+import com.address.book.dto.ContactDto;
+import com.address.book.exception.ContactMappingException;
 import com.address.book.exception.UpdateRepositoryException;
 import com.address.book.model.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,20 +25,22 @@ public class AddressBookController {
     private AddressBookService addressBookService;
 
     @RequestMapping(value = "/contacts", method = RequestMethod.GET)
-	public ResponseEntity<List<Contact>> getAllContacts() throws UpdateRepositoryException {
+	public ResponseEntity<List<ContactDto>> getAllContacts() throws UpdateRepositoryException, ContactMappingException {
 		return new ResponseEntity<>(addressBookService.getAllContacts(), HttpStatus.OK);
 	}
 
     @RequestMapping(value = "/add/contact", method = RequestMethod.POST)
-    public ResponseEntity<List<Contact>> saveContact(@RequestBody Contact contact) throws UpdateRepositoryException {
-        if (StringUtils.isEmpty(contact.getName()) && StringUtils.isEmpty(contact.getTelephoneNumber())) {
-            return new ResponseEntity<>(addressBookService.saveContact(contact), HttpStatus.OK);
+    public ResponseEntity<List<ContactDto>> saveContact(@RequestBody ContactDto contactDto) throws UpdateRepositoryException,
+    ContactMappingException {
+        if (!StringUtils.isEmpty(contactDto.getName()) && !StringUtils.isEmpty(contactDto.getTelephoneNumber())) {
+            return new ResponseEntity<>(addressBookService.saveContact(contactDto), HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(value = "/delete/contact", method = RequestMethod.PUT)
-    public ResponseEntity<List<Contact>> deleteContact(@RequestParam("id") String id) throws UpdateRepositoryException {
+    @RequestMapping(value = "/delete/contact/{id}", method = RequestMethod.POST)
+    public ResponseEntity<List<ContactDto>> deleteContact(@PathVariable("id") String id) throws UpdateRepositoryException,
+    ContactMappingException{
         if (id != null) {
             addressBookService.deleteContactById(id);
             return new ResponseEntity<>(addressBookService.getAllContacts(), HttpStatus.OK);

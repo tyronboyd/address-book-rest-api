@@ -22,7 +22,6 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 @ComponentScan
 public class ApplicationRun extends SpringBootServletInitializer {
-	
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {

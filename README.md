@@ -2,6 +2,16 @@
 
 This application is Build using Java 8 with Maven, Spring Boot with MongoDB.
 
+Dependency is MongoDB
+
+## Install MAC
+
+    brew install mongodb
+
+## Install Windows
+
+    https://www.mongodb.com/dr/fastdl.mongodb.org/win32/mongodb-win32-x86_64-2012plus-4.2.0-signed.msi/download
+
 ## Install
 
     mvn clean intstall -U
@@ -16,7 +26,7 @@ This application is Build using Java 8 with Maven, Spring Boot with MongoDB.
 
 # REST API
 
-## Get list Contacts
+## Get Contacts List
 
 ### Request
 
@@ -31,4 +41,34 @@ This application is Build using Java 8 with Maven, Spring Boot with MongoDB.
             "name": "Barron Smith",
             "telephoneNumber": "+61 468 422 558"
         }
+    ]
+
+## Save Contact
+
+### Request
+
+`POST /add-contact/`
+
+    curl -i --header "Content-Type: application/json" --request POST --data '{"name": "Barron Smith", "telephoneNumber": "+61 468 422 558"}' http://localhost:8080/add/contact/
+
+### Response
+    [
+        {
+            "id": "5d731b817362f924fceaf6fd",
+            "name": "Barron Smith",
+            "telephoneNumber": "+61 468 422 558"
+        }
+    ]
+
+## Delete Contact
+
+### Request
+
+`POST /add-contact/`
+
+    curl -i --header "Content-Type: application/json" --request POST http://localhost:8080/delete/contact/5d731b817362f924fceaf6fd
+
+### Response
+    [
+
     ]

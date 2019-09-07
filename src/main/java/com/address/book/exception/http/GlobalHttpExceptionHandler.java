@@ -25,7 +25,7 @@ public class GlobalHttpExceptionHandler {
 
     @ExceptionHandler(HttpNotFoundException.class)
     @ResponseBody
-    @ResponseStatus(HttpStatus.BAD_REQUEST) // 400
+    @ResponseStatus(HttpStatus.NOT_FOUND) // 404
     public HttpErrorResponse handleConflict(HttpNotFoundException ex) {
         return this.initHttpErrorResponse(ex, ex.getErrMessage(), "404");
     }

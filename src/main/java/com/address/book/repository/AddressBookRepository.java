@@ -1,5 +1,6 @@
 package com.address.book.repository;
 
+import com.address.book.model.AddressBook;
 import com.address.book.model.Contact;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -8,36 +9,44 @@ import java.util.List;
 /**
  * Created by tyronboyd on 4/9/19.
  */
-public interface AddressBookRepository extends MongoRepository<Contact, String> {
+public interface AddressBookRepository extends MongoRepository<AddressBook, String> {
 
     /**
-     * Saves a Contact to MongoDB
+     * Saves an AddressBook to MongoDB
      * @param contact
      * @return Contact
      */
 
-    Contact save(Contact contact);
+    AddressBook save(AddressBook contact);
 
     /**
-     * Deletes a Contact by the given ID in MongoDB
+     * Deletes an AddressBook by the given ID in MongoDB
      * @param id
      */
 
     void deleteById(String id);
 
     /**
-     * Finds all contacts ordered by name descending in MongoDB
+     * Finds all AddressBooks
      * @return List<Contact>
      */
 
-    List<Contact> findAllByOrderByNameAsc();
+    List<AddressBook> findAll();
 
     /**
-     * Maps Template list to TemplateTable which is used as a template search result
+     * Get Address Book By ID
      * @param id
      * @return Contact
      */
 
-    Contact getContactById(String id);
+    AddressBook getAddressBookById(String id);
+
+    /**
+     * Find Address Book By Name
+     * @param name
+     * @return AddressBook
+     */
+
+    AddressBook findAddressBookByName(String name);
 
 }

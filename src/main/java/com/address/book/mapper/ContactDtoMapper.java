@@ -24,8 +24,7 @@ public class ContactDtoMapper {
     public List<ContactDto> mapToDtoList(List<Contact> contacts) throws ContactMappingException {
         List<ContactDto> contactDtoList = new ArrayList<>();
         contacts.stream().forEach(contact -> {
-            if (!StringUtils.isEmpty(contact.getName()) && !StringUtils.isEmpty(contact.getId()) &&
-                    !StringUtils.isEmpty(contact.getTelephoneNumber())) {
+            if (!StringUtils.isEmpty(contact.getName()) && !StringUtils.isEmpty(contact.getTelephoneNumber())) {
                 ContactDto contactDto = new ContactDto();
                 contactDto.setId(contact.getId());
                 contactDto.setName(contact.getName());

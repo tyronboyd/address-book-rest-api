@@ -1,9 +1,9 @@
 package com.address.book.service;
 
+import com.address.book.dto.AddressBookDto;
 import com.address.book.dto.ContactDto;
-import com.address.book.exception.ContactMappingException;
+import com.address.book.exception.AddressBookMappingException;
 import com.address.book.exception.UpdateRepositoryException;
-import com.address.book.model.Contact;
 
 import java.util.List;
 
@@ -13,32 +13,34 @@ import java.util.List;
 public interface AddressBookService {
 
     /**
-     * Gets all Contacts
-     * @return List<ContactDto>
+     * Gets all Address Books
+     * @return List<AddressBookDto>
      */
 
-    List<ContactDto> getAllContacts() throws UpdateRepositoryException, ContactMappingException;
+    List<AddressBookDto> getAllAddressBooks() throws UpdateRepositoryException, AddressBookMappingException;
 
     /**
-     * Deletes a Contact by ID
+     * Deletes a Address Book by ID
      * @param id
      */
 
-    void deleteContactById(String id) throws UpdateRepositoryException, ContactMappingException;
+    void deleteAddressBookById(String id) throws UpdateRepositoryException, AddressBookMappingException;
 
     /**
-     * Saves a Contact
-     * @param contact
-     * @return List<ContactDto>
+     * Saves a Address Book
+     * @param addressBookDto
+     * @return List<AddressBookDto>
      */
 
-    List<ContactDto> saveContact(ContactDto contact) throws UpdateRepositoryException, ContactMappingException;
+    List<AddressBookDto> saveAddressBook(AddressBookDto addressBookDto) throws UpdateRepositoryException, AddressBookMappingException ;
 
     /**
-     * Get Contacts by ID
-     * @param id
-     * @return ContactDto
+     * Saves a Address Book Contact to a particular Address Book
+     * @param contactDto
+     * @param addressBookName
+     * @return List<AddressBookDto>
      */
 
-    ContactDto getContactById(String id) throws UpdateRepositoryException, ContactMappingException;
+    List<AddressBookDto> saveContactToAddressBook(ContactDto contactDto, String addressBookName) throws
+            UpdateRepositoryException, AddressBookMappingException;
 }

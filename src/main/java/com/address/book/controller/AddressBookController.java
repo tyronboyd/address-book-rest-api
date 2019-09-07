@@ -79,5 +79,16 @@ public class AddressBookController {
             throw new HttpBadRequestException(((HttpBadRequestException) ex).getErrMessage());
         }
     }
+
+    @RequestMapping(value = "/address/book/contacts/distinct", method = RequestMethod.GET)
+    public ResponseEntity<List<ContactDto>> getDistinctAddressBookContacts() {
+        try {
+            List<ContactDto> contactDtoList = addressBookService.filterAddressBookDistinctByName();
+            return new ResponseEntity<>(contactDtoList, HttpStatus.OK);
+        } catch (Exception ex) {
+            logger.debug("Could not add Contact to Address Book: ", ex);
+            throw new HttpBadRequestException("Could not get distinct contacts");
+        }
+    }
 }
 

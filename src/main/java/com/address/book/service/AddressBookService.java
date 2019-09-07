@@ -43,4 +43,11 @@ public interface AddressBookService {
 
     List<AddressBookDto> saveContactToAddressBook(ContactDto contactDto, String addressBookName) throws
             UpdateRepositoryException, AddressBookMappingException;
+
+    /**
+     * Filters a list of Address Books distinct by name
+     * @return List<ContactDto>
+     */
+
+    List<ContactDto> filterAddressBookDistinctByName() throws AddressBookMappingException;
 }

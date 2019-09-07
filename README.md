@@ -146,3 +146,23 @@ Please see below for the endpoints available.
             ]
         }
     ]
+
+### Request
+
+`GET /address/book/contacts/distinct`
+
+    curl -i --header "Content-Type: application/json" http://localhost:8080/address/book/contacts/distinct
+
+### Response
+    [
+        {
+            "id": "5d7359eb7362f9841eb9b7e1",
+            "name": "Barron Smith",
+            "telephoneNumber": "+61 468 000 000"
+        },
+        {
+            "id": "5d7354cf7362f98326be5816",
+            "name": "Tyron Boyd",
+            "telephoneNumber": "+61 456 789 123"
+        }
+    ]

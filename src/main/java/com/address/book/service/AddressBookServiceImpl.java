@@ -16,8 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toCollection;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 /**
  * Created by tyronboyd on 4/9/19.
@@ -80,6 +85,18 @@ public class AddressBookServiceImpl implements AddressBookService {
             throw new HttpBadRequestException("Could not map contact from Dto");
         }
         return this.addressBookDtoMapper.mapToDtoList(this.addressBookRepository.findAll());
+    }
+
+    public List<ContactDto> filterAddressBookDistinctByName() {
+        List<AddressBookDto> addressBookDtoList = addressBookDtoMapper.mapToDtoList(addressBookRepository.findAll());
+        List<ContactDto> contactDtoList = new ArrayList<ContactDto>();
+        addressBookDtoList.stream().forEach(addressBookDto -> {
+            addressBookDto.getContactList().stream().forEach(contactDto -> {
+                contactDtoList.add(contactDto);
+            });
+        });
+        return contactDtoList.stream().collect(collectingAndThen(toCollection(() ->
+                new TreeSet<>(comparing(ContactDto::getName))), ArrayList::new));
     }
 
 

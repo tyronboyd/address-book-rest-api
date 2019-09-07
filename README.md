@@ -80,13 +80,13 @@ Dependencies: MongoDB, Maven, Java 8
     curl -i --header "Content-Type: application/json" --request POST --data '{"name": "AddressBook2"}' http://localhost:8080/add/address/book
 
 ### Response
-[
-    {
-        "id": "5d73584b7362f9841eb9b7e0",
-        "name": "AddressBook2",
-        "contactList": []
-    }
-]
+    [
+        {
+            "id": "5d73584b7362f9841eb9b7e0",
+            "name": "AddressBook2",
+            "contactList": []
+        }
+    ]
 
 ### Request
 
@@ -95,13 +95,13 @@ Dependencies: MongoDB, Maven, Java 8
     curl -i --header "Content-Type: application/json" http://localhost:8080/address/books
 
 ### Response
-[
-    {
-        "id": "5d73584b7362f9841eb9b7e0",
-        "name": "AddressBook2",
-        "contactList": []
-    }
-]
+    [
+        {
+            "id": "5d73584b7362f9841eb9b7e0",
+            "name": "AddressBook2",
+            "contactList": []
+        }
+    ]
 ### Request
 
 `POST /delete/address/book/{id}`
@@ -118,16 +118,16 @@ Dependencies: MongoDB, Maven, Java 8
     curl -i --header "Content-Type: application/json" --request POST --data '{"name": "Barron Smith", "telephoneNumber": "+61 468 422 558"}' http://localhost:8080/add/address/book/contact/AddressBook2
 
 ### Response
-[
-    {
-        "id": "5d73584b7362f9841eb9b7e0",
-        "name": "AddressBook2",
-        "contactList": [
-            {
-                "id": "5d7359eb7362f9841eb9b7e1",
-                "name": "Barron Smith",
-                "telephoneNumber": "+61 468 422 558"
-            }
-        ]
-    }
-]
+    [
+        {
+            "id": "5d73584b7362f9841eb9b7e0",
+            "name": "AddressBook2",
+            "contactList": [
+                {
+                    "id": "5d7359eb7362f9841eb9b7e1",
+                    "name": "Barron Smith",
+                    "telephoneNumber": "+61 468 422 558"
+                }
+            ]
+        }
+    ]

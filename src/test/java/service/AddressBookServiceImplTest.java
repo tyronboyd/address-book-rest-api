@@ -19,6 +19,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 /**
@@ -42,6 +43,16 @@ public class AddressBookServiceImplTest {
     public void testGetAlLContacts() throws Exception {
         when(contactDtoMapper.mapToDtoList(addressBookRepository.findAllByOrderByNameAsc())).thenReturn(getContactDtoList());
         List<ContactDto> contactDtos = addressBookService.getAllContacts();
+        Assert.assertEquals(contactDtos.size(), 1);
+    }
+
+    @Test
+    public void testSaveContact() throws Exception {
+        when(addressBookRepository.save(contactDtoMapper.mapFromDto(any(ContactDto.class))))
+                .thenReturn(getContact());
+        when(contactDtoMapper.mapToDtoList(addressBookRepository.findAllByOrderByNameAsc()))
+                .thenReturn(getContactDtoList());
+        List<ContactDto> contactDtos = addressBookService.saveContact(getContactDto());
         Assert.assertEquals(contactDtos.size(), 1);
     }
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.address.book.repository.AddressBookRepository;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ public class AddressBookServiceImpl implements AddressBookService {
         if (!StringUtils.isEmpty(contacts)) {
             return contacts;
         }
-        throw new UpdateRepositoryException("Unable to fetch Contacts List.");
+        return new ArrayList<>();
     }
 
     public void deleteContactById(String id) throws UpdateRepositoryException {

@@ -4,12 +4,14 @@ This application is Build using Java 8 with Maven, Spring Boot with MongoDB.
 
 ## How it works.
 
-This application has the ability to add multiple address books into mongo db addressBook table.
+This application has the ability to add multiple address books into mongo db addressBook table
 and Contacts into an Address Book. You can add Contacts into a particular Address Book by passing the Address Book name as a parameter.
-In a real-world web application, we could use the UI to pass the ID instead of the Address Book name!
+In a real-world web application, we would probably use the UI to pass the ID instead of the Address Book name!
 
 The application also allows the user to add contacts into a Contacts table Within the AddressBook database.
 JUnit tests have been written for the Contacts, I ran out of time and was unable to cover everything! :).
+
+Please see below for the endpoints available.
 
 Dependencies: MongoDB, Maven, Java 8
 

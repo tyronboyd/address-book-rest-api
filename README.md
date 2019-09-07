@@ -103,6 +103,8 @@ Please see below for the endpoints available.
         }
     ]
 
+## Get Address Books
+
 ### Request
 
 `GET /address/books`
@@ -117,6 +119,9 @@ Please see below for the endpoints available.
             "contactList": []
         }
     ]
+
+## Delete Address Book by ID
+
 ### Request
 
 `POST /delete/address/book/{id}`
@@ -125,6 +130,8 @@ Please see below for the endpoints available.
 
 ### Response
     []
+
+## Add Contact to Address Book by Name
 
 ### Request
 
@@ -146,6 +153,8 @@ Please see below for the endpoints available.
             ]
         }
     ]
+
+## Get all Contacts in all Address Books Distinct by Name
 
 ### Request
 
